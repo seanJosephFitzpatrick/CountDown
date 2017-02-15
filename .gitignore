@@ -1,3 +1,14 @@
+#Racket .gitignore
+# DrRacket autosave files
+*~
+\#*
+.\#*
+
+# Compiled racket bytecode
+compiled
+
+
+#Scheme .gitignore
 *.ss~
 *.ss#*
 .#*.ss
