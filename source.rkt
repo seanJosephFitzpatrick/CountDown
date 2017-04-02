@@ -18,7 +18,7 @@
   ; If pos is zero return first element in the list with car
   (if (zero? n)
       (car ls)
-      ;Else return the rest of the list and get elemnt at pos n-1
+      ;Else return the rest of the list and get element at pos n-1
       (my-list-ref (cdr ls) (- n 1))))
 
 
