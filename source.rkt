@@ -8,4 +8,13 @@
 (define ops (list + - / *))
 
 ;Define random number between 101 and 999
-(define rand (random 101 1000))
+(define rand (random 101 1000))car ops
+
+;Returns nth element from the list
+(define a(list-ref (list 'a 'b 'c 'd 'e 'f) 4))
+
+
+
+
+
+
