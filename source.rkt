@@ -21,6 +21,37 @@
       ;Else return the rest of the list and get element at pos n-1
       (my-list-ref (cdr ls) (- n 1))))
 
+;RPN taken from - https://rosettacode.org/wiki/Parsing/RPN_calculator_algorithm#Racket
+(define (calculate-RPN expr)
+  (for/fold ([stack '()]) ([token expr])
+    ;(printf "~a\t -> ~a~N" token stack)
+    (match* (token stack)
+     [((? number? n) s) (cons n s)]
+     [('+ (list x y s ___)) (cons (+ x y) s)]
+     [('- (list x y s ___)) (cons (- y x) s)]
+     [('* (list x y s ___)) (cons (* x y) s)]
+     [('/ (list x y s ___)) (cons (/ y x) s)]
+     [('^ (list x y s ___)) (cons (expt y x) s)]
+     [(x s) (error "calculate-RPN: Cannot calculate the expression:" 
+                   (reverse (cons x s)))])))
+
+
+;Define random-element, returns random element from list
+(define (random-element list)
+  (list-ref list (random (length list))))
+
+;Define string s
+(define s "6 75 * 50 / 100 3 + * 25 +")
+
+;Define permutations of three element list
+(define lp (permutations (list 1 2 3)))
+
+;Define shufffle for list
+(define shuf (shuffle '(1 2 3 4 5 6 7 8 9 10 25 50 75 100)))
+
+;Define cartesian-product for two numbers and 1 operator
+(define cp (cartesian-product '(1 2 3) '(4 5 6) '(+ - / *)))
+
 
 
 
