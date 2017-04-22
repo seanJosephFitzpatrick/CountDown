@@ -1,6 +1,6 @@
 # CountDown
 
-Create a program that solves the countdown numbers game using the Racket functional programming language. For more information on the countdown numbers game works please see the [Countdown](https://github.com/seanJosephFitzpatrick/CountDown/wiki/2.-Countdown) section of this Wiki. For more information on Racket please see [Racket](https://github.com/seanJosephFitzpatrick/CountDown/wiki/3.-Racket) section of this Wiki.
+Create a program that solves the countdown numbers game using the Racket functional programming language. For more information on how the countdown numbers game works please see the [Countdown](https://github.com/seanJosephFitzpatrick/CountDown/wiki/2.-Countdown) section of this Wiki. For more information on Racket please see [Racket](https://github.com/seanJosephFitzpatrick/CountDown/wiki/3.-Racket) section of this Wiki.
 
 ## Getting Started
 

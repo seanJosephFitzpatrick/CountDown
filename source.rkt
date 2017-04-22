@@ -8,7 +8,7 @@
 ;(define ops (list + - / *))
 
 ;Define random number between 101 and 999
-;(define rand (random 101 1000))car ops
+(define rand (random 101 1000))
 
 ;Returns nth element from the list
 (define a(list-ref (list 1 2 3 4 5 6) 4))
@@ -20,21 +20,6 @@
       (car ls)
       ;Else return the rest of the list and get element at pos n-1
       (my-list-ref (cdr ls) (- n 1))))
-
-;RPN taken from - https://rosettacode.org/wiki/Parsing/RPN_calculator_algorithm#Racket
-(define (calculate-RPN expr)
-  (for/fold ([stack '()]) ([token expr])
-    ;(printf "~a\t -> ~a~N" token stack)
-    (match* (token stack)
-     [((? number? n) s) (cons n s)]
-     [('+ (list x y s ___)) (cons (+ x y) s)]
-     [('- (list x y s ___)) (cons (- y x) s)]
-     [('* (list x y s ___)) (cons (* x y) s)]
-     [('/ (list x y s ___)) (cons (/ y x) s)]
-     [('^ (list x y s ___)) (cons (expt y x) s)]
-     [(x s) (error "calculate-RPN: Cannot calculate the expression:" 
-                   (reverse (cons x s)))])))
-
 
 ;Define random-element, returns random element from list
 (define (random-element list)
@@ -70,10 +55,90 @@
 ;Define permutations, cartesian-product with duplicates with defined list
 (define cp6 (cartesian-product (permutations lst)))
 
-(define (calcualte-RPN cp6)
-  (if (null? cp6)
+;Creates static list of numbers and operators
+(define f null)
+
+;static list of operands
+(define op (list '+ '+ '+ '+ '+ '- '- '- '- '- '- '* '* '* '* '*  '/ '/ '/ '/ '/))
+
+;Sourced from https://rosettacode.org/wiki/Parsing/RPN_calculator_algorithm#Racket
+(define (calculate-RPN expr)
+  (for/fold ([stack '()]) ([token expr])
+    ;(printf "~a\t -> ~a~N" token stack) ; Uncomment to see workings, not recommended for long lists.
+    (match* (token stack)
+     [((? number? n) s) (cons n s)]
+     [('+ (list x y s ___)) (cons (+ x y) s)]
+     [('- (list x y s ___)) (cons (- y x) s)]
+     [('* (list x y s ___)) (cons (* x y) s)]
+     [('/ (list x y s ___)) (if (= y 0)
+                                (cons 0 s)
+                                (if (= x 0)
+                                    (cons 0 s)
+                                    (cons (/ x y) s)))]
+     [(x s) (error "calculate-RPN: Cannot calculate the expression:" 
+                   (reverse (cons x s)))])))
+
+ 
+;takes in (e list) and (r empty stack)
+(define (valid-rpn? e[r 0])
+  ;if e is null
+  (if(null? e)
+     ;if stack == 1 return true else false
+     (if (= r 1)
+         #t
+         #f)
+     ;check if first element on the list e is (valid rpn) number
+     (if(number? (car e) )
+        ;if valid rpn add element to (r stack) 
+        (valid-rpn? (cdr e) (+ r 1))
+        ;if (r stack) has more than one number on the stack
+        (if(> r 1)
+           (valid-rpn? (cdr e) (- r 1))
+           #f))))
+
+
+;define (x list) and (t target) number
+(define (sum x t)
+  ;if x is null 0
+  (if (null? x)
       0
-(calculate-RPN(car cp6) (calcualte-RPN (cdr cp6)))))
+      ;cond if/else
+      (cond [(valid-rpn? (car x))
+             ;eqv is equals
+             (cond [(eqv? (car (calculate-RPN (car x))) t)
+                    ;writeln writes on console
+                    (writeln (car x))]
+                   ;moves onto next list of numbers
+                   [else (sum (cdr x) t)])]
+            ;moves onto next list of numbers
+            [else (sum (cdr x) t)])))
+
+;define make list mklist (l original list of numbers for calculation )- (s 2)new stack - g list null
+(define (mklist l (s 2) (g null))
+  ;cond - if s <= length l
+  (cond ((<= s (length l))
+         ;retrieve all combinations of list l - number of elements depend on the value s
+         ;append elemnts and operators to g
+         (mklist l (+ s 1)
+                 (append g (cartesian-product (combinations l s) (remove-duplicates(combinations op (- s 1)))))))
+        ;return g
+        (else  g)))
+
+;define rpn (l list - original list) (t target number)
+(define (rpn l t)
+  ;set f to be (mklist l) - what g will be
+  (set! f (mklist l)) (makep f t))
+;define makep l and gie t target number
+(define (makep l t)
+  ;is the list l empty
+  (cond [(null? l) (write 'Target:) t]
+        ;flatten
+      [else (sum (permutations (flatten (car l))) t)(makep (cdr l) t)]))
+
+"To run (rpn (list 'six numbers') Target Number)"
+"Example (rpn (list 1 2 3 4 25 50) 100)"
+"If you want target number use 'rand'"
+
 
 
 
