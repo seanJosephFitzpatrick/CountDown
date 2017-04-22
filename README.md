@@ -1,40 +1,22 @@
 # CountDown
 
-One Paragraph of project description goes here
+Create a program that solves the countdown numbers game using the Racket functional programming language. For more information on the countdown numbers game works please see the [Countdown](https://github.com/seanJosephFitzpatrick/CountDown/wiki/2.-Countdown) section of this Wiki. For more information on Racket please see [Racket](https://github.com/seanJosephFitzpatrick/CountDown/wiki/3.-Racket) section of this Wiki.
 
 ## Getting Started
 
-Download and extract the zip folder here []()                         
+Download and extract the zip folder [here](https://github.com/seanJosephFitzpatrick/CountDown/archive/master.zip)                         
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
-
-```
-Give examples
-```
+DrRacket - download [here](https://racket-lang.org/download/)
 
 ### Installing
 
-A step by step series of examples that tell you have to get a development env running
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
+How to install [Racket](https://www.youtube.com/watch?v=UOqcLGGKVr8) windows
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+From DrRacket --> File tab --> open --> select .rkt file from file explorer.
 
 ## Built With
 
@@ -47,11 +29,4 @@ Add additional notes about how to deploy this on a live system
 ## License
 
 This project is licensed under the [MIT](https://github.com/seanJosephFitzpatrick/CountDown/blob/master/LICENSE) License. 
-
-## Acknowledgments
-
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
-
 

@@ -3,6 +3,7 @@
 *~
 \#*
 .\#*
+.bak
 
 # Compiled racket bytecode
 compiled
